@@ -33,10 +33,31 @@ class Juego:
 
         #agrego los elementos a el frame del juego q desp se cargara en la ventana pasada por parametro
         self.frame = Frame(ventana)
-        Label(self.frame, image=self.render_logo).pack(anchor="w",side="left", padx=5)
-        Label(self.frame, text=self.nombre).pack(anchor="n", side="top")
-        Label(self.frame, text=format(self.precio_final, '0.2f')).pack(anchor="s", side="bottom")
-        self.frame.pack()
+        self.frame.config(
+            bg= "#16202D",
+        )
+        #label imagen
+        labelImagen = Label(self.frame, image=self.render_logo)
+        labelImagen.config(bg="black")
+        labelImagen.pack(anchor="w",side="left", padx=5)
+        #label titulo del juego
+        labelNombre = Label(self.frame, text=self.nombre)
+        labelNombre.config(bg="#16202D", fg="white", font=("",14))
+        labelNombre.pack(anchor="n", side="top")
+
+        #label precio original
+        labelPrecioOriginal=Label(self.frame, text=f"PRECIO ORIGINAL = ARS $"+format(self.precio_original, '0.2f'))
+        labelPrecioOriginal.config(bg="#16202D",fg="#C5C3C0")
+        labelPrecioOriginal.pack(anchor="s", side="bottom")
+
+        #label precio final  
+        labelPrecioFinal = Label(self.frame, text=f"PRECIO FINAL = ARS $"+format(self.precio_final, '0.2f'))
+        labelPrecioFinal.config(fg="#C5C3C0",bg="#16202D")
+        labelPrecioFinal.pack(anchor="s", side="bottom")
+        
+        
+        self.frame.pack(expand=True)
+        self.frame.pack_propagate(True)
 
     def getPrecioFinal(self):
 

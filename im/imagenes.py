@@ -7,7 +7,7 @@ def cargarImagen(direccion_imagen):
     Function that generates the ImageTk object from a image direction
     
         Parameter:
-            direccion_imagen: string ,  image direction
+            direccion_imagen: string ,  image local direction 
         
         Returns:
             render : ImageTk object from the image
@@ -29,7 +29,7 @@ def descargarImagen(url_imagen, nombre_juego):
 
     nombre_local_imagen = f"" + nombre_juego + ".png" # El nombre con el que queremos guardarla
     imagen = requests.get(url_imagen).content
-    with open(nombre_local_imagen, 'wb') as handler:
+    with open(f"./images/"+nombre_local_imagen, 'wb') as handler:
 	    handler.write(imagen)
-    return f"./" + nombre_local_imagen
+    return f"./images/" + nombre_local_imagen
 
