@@ -9,7 +9,7 @@ class Juego:
     __frame = ""
 
 
-    def __init__(self,nombre,render_logo,precio_original,ventana):
+    def __init__(self,nombre,render_logo,precio_original,ventana,row):
 
         """
         Class constructor:
@@ -56,8 +56,7 @@ class Juego:
         labelPrecioFinal.pack(anchor="s", side="bottom")
         
         
-        self.frame.pack(expand=True)
-        self.frame.pack_propagate(True)
+        self.frame.grid(row=row,column=0)
 
     def getPrecioFinal(self):
 
