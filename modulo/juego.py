@@ -5,7 +5,7 @@ class Juego:
     __precio_original = ""
     __precio_final = ""
     __nombre = ""
-    __render_logo = "" #
+    __render_logo = "" 
     __frame = ""
 
 
