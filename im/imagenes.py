@@ -24,12 +24,13 @@ def descargarImagen(url_imagen, nombre_juego):
     Args:
         url_imagen (str): url of the image 
         nombre_juego (str_): name of game, used for the image archive
-    Return
+    Return:
+        direction local of the image
     """
 
-    nombre_local_imagen = f"" + nombre_juego + ".png" # El nombre con el que queremos guardarla
+    direccion_local_imagen = f"./images/{nombre_juego}.jpg" # El nombre con el que queremos guardarla
     imagen = requests.get(url_imagen).content
-    with open(f"./images/"+nombre_local_imagen, 'wb') as handler:
+    with open(direccion_local_imagen, 'wb') as handler:
 	    handler.write(imagen)
-    return f"./images/" + nombre_local_imagen
+    return direccion_local_imagen
 
