@@ -30,7 +30,12 @@ def descargarImagen(url_imagen, nombre_juego):
 
     direccion_local_imagen = f"./images/{nombre_juego}.jpg" # El nombre con el que queremos guardarla
     imagen = requests.get(url_imagen).content
-    with open(direccion_local_imagen, 'wb') as handler:
-	    handler.write(imagen)
+
+    file = open(direccion_local_imagen, 'wb')
+    try:
+        file.write(imagen)
+    finally:
+        file.close()
+
     return direccion_local_imagen
 
