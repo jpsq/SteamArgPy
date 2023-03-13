@@ -1,6 +1,6 @@
 from tkinter import *
 from tkinter import ttk
-from modulo import juego2 as mod
+from modulo import juego as mod
 from modulo import scrapper as sc
 from im import imagenes as im
 
