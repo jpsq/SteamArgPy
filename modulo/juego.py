@@ -1,8 +1,16 @@
 from tkinter import Frame,Label
+import controlador as c
 
 class Juego:
 
-    def __init__(self,nombre,render_logo,precio_original,ventana):
+    __precio_original = 0
+    __precio_final = 0
+    __nombre = ""
+    __render_logo = None
+    __frame = None
+
+
+    def __init__(self,nombre,render_logo,precio_original,ventana,ventana_principal=0):
         """
         Constructor de clase:
             Carga valores a la instancia y crea el Tkinter frame para este objeto
@@ -11,47 +19,50 @@ class Juego:
             nombre: string
             render_logo = ImageTk object , not work create the ImageTk in the class with de direction of image
             precio_original = float
-            ventana = Tk
+            ventana = Tk Frame,  en en donde se inserta el frame del juego
+            ventana_principal = clase window (w), 
 
         Retorna:
             None
         """
 
-        self.precio_original = precio_original
-        self.precio_final = self.precio_original * 1.65 #esto dsp hacer con scraping de impuestos
-        self.nombre = nombre
-        self.render_logo = render_logo
+        self.__precio_original = precio_original
+        self.__precio_final = self.__precio_original * 1.65 #esto dsp hacer con scraping de impuestos
+        self.__nombre = nombre
+        self.__render_logo = render_logo
 
         #agrego los elementos a el frame del juego q desp se cargara en la ventana pasada por parametro
-        self.frame = Frame(ventana)
-        self.frame.config(
+        self.__frame = Frame(ventana)
+        self.__frame.config(
             bg= "#16202D",
             border=3,
             relief="solid"
         )
         #label imagen
-        labelImagen = Label(self.frame, image=self.render_logo)
+        labelImagen = Label(self.__frame, image=self.__render_logo)
         labelImagen.config(bg="black")
         labelImagen.pack(anchor="w",side="left", padx=5)
         #label titulo del juego
-        labelNombre = Label(self.frame, text=self.nombre)
+        labelNombre = Label(self.__frame, text=self.__nombre)
         labelNombre.config(bg="#16202D", fg="white", font=("",14))
         labelNombre.pack(anchor="n", side="top")
 
         #label precio original
-        labelPrecioOriginal=Label(self.frame, text=f"PRECIO ORIGINAL = ARS $"+format(self.precio_original, '0.2f'))
+        labelPrecioOriginal=Label(self.__frame, text=f"PRECIO ORIGINAL = ARS $"+format(self.__precio_original, '0.2f'))
         labelPrecioOriginal.config(bg="#16202D",fg="#C5C3C0")
         labelPrecioOriginal.pack(anchor="s", side="bottom")
 
         #label precio final  
-        labelPrecioFinal = Label(self.frame, text=f"PRECIO FINAL = ARS $"+format(self.precio_final, '0.2f'))
+        labelPrecioFinal = Label(self.__frame, text=f"PRECIO FINAL = ARS $"+format(self.__precio_final, '0.2f'))
         labelPrecioFinal.config(fg="#C5C3C0",bg="#16202D")
         labelPrecioFinal.pack(anchor="s", side="bottom")
+
+        #botones quitar y deshabilitar
         
-        self.frame.pack(fill="x", expand="yes",anchor="n")
+        self.__frame.pack(fill="x", expand="yes",anchor="n")
 
     def getPrecioFinal(self):
-        return self.precio_final
+        return self.__precio_final
     
     def getFrame(self):
-        return self.frame
+        return self.__frame
