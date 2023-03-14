@@ -1,5 +1,4 @@
-from tkinter import Frame,Label
-import controlador as c
+from tkinter import Frame,Label,Button
 
 class Juego:
 
@@ -8,9 +7,10 @@ class Juego:
     __nombre = ""
     __render_logo = None
     __frame = None
+    __controlador = None
 
 
-    def __init__(self,nombre,render_logo,precio_original,ventana,ventana_principal=0):
+    def __init__(self,nombre,render_logo,precio_original,ventana,controlador):
         """
         Constructor de clase:
             Carga valores a la instancia y crea el Tkinter frame para este objeto
@@ -30,6 +30,7 @@ class Juego:
         self.__precio_final = self.__precio_original * 1.65 #esto dsp hacer con scraping de impuestos
         self.__nombre = nombre
         self.__render_logo = render_logo
+        self.__controlador = controlador
 
         #agrego los elementos a el frame del juego q desp se cargara en la ventana pasada por parametro
         self.__frame = Frame(ventana)
@@ -58,6 +59,7 @@ class Juego:
         labelPrecioFinal.pack(anchor="s", side="bottom")
 
         #botones quitar y deshabilitar
+        boton_borrar = Button(self.__frame, text="Quitar", command=self.borrar).pack()
         
         self.__frame.pack(fill="x", expand="yes",anchor="n")
 
@@ -66,3 +68,7 @@ class Juego:
     
     def getFrame(self):
         return self.__frame
+
+    def borrar(self):
+        self.__frame.destroy()
+        self.__controlador.borrar_juego(self)

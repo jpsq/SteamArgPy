@@ -1,4 +1,4 @@
-import window as w
+from controlador import Controlador
 
-window1 = w.Window()
-window1.iniciar()
+c1 = Controlador()
+c1.iniciar()

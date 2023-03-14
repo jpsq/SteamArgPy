@@ -1,11 +1,8 @@
 from tkinter import *
-from im import imagenes as im
-from modulo import juego as mod
-from modulo import scrapper as sc
 
 class Window:
 
-    def __init__(self):
+    def __init__(self,controlador):
         self.ventana=Tk()
         self.ventana.title("Steam Arg Py")
         self.ventana.geometry("450x300")
@@ -13,14 +10,13 @@ class Window:
         self.ancho = 400
 
         self.total = 0
-        self.lista_juegos = list()
 
         self.label_total = Label(self.ventana, text= f"Total: ${self.total}")
         self.label_total.pack()
 
         self.entrada = StringVar()
         Entry(self.ventana, textvariable=self.entrada).pack()
-        self.bBusqueda = Button(self.ventana,text="Agregar juego", command=self.agregar).pack()
+        self.bBusqueda = Button(self.ventana,text="Agregar juego", command=lambda: controlador.agregar(self.entrada) ).pack()
 
         self.frame = LabelFrame(self.ventana)
         self.frame.config(bg= "#16202D")
@@ -61,23 +57,7 @@ class Window:
         if(ancho_juego_agregado > self.ancho):
             self.ventana.geometry(f"{ancho_juego_agregado+40}x300") #40 extra por el scrollbar
 
-    def agregar(self):
-        """
-        Funcion que agrega a la lista de juegos de la clase un juego nuevo, tomando los datos del campo de entrada
-        y haciendo scraping con la clase scrapper ("sc"), descargando y generando la imagen para luego crear
-        el juego con su constructor (el juego renderiza su propia vista en esta ventana).
-    
-        Parameter:
-            None
-        
-        Returns:
-            None
-        """
-
-        datos_juego = sc.obtener(self.entrada.get())
-        render = im.cargarImagen( im.descargarImagen(datos_juego[2], self.entrada.get().replace(" ", "_") ) )
-        self.lista_juegos.insert( len(self.lista_juegos), mod.Juego(datos_juego[0], render, datos_juego[1],  self.getFrameGrid())) 
-        
+    def actualizarFrames(self):
         #es necesario asctualizar para evitar retrasos en la actualizacion del scrollbar
         self.frame.update()
         self.mycanvas.update()
@@ -87,12 +67,7 @@ class Window:
         self.mycanvas.configure(scrollregion = self.mycanvas.bbox("all"))
         self.frame.pack(fill="both", expand="yes", padx=10, pady=10)
 
-        #actualizar ancho de la ventana   
-        self.ajustar_ancho_ventana(self.lista_juegos[-1].getFrame().winfo_reqwidth())
-
-        self.actualizar_total(self.lista_juegos[-1].getPrecioFinal())
-
-    def actualizar_total(self, precio):
+    def sumar_a_total(self, precio):
         """
         La funcion actualiza el valor del total, y el label de la ventana que lo muestra
 
@@ -103,6 +78,11 @@ class Window:
             None
         """
         self.total += precio
+        self.label_total.config(text=f"Total: ${format(self.total, '0.2f')}")
+
+    def quitar_a_total(self, precio):
+
+        self.total -= precio
         self.label_total.config(text=f"Total: ${format(self.total, '0.2f')}")
         
 
