@@ -3,20 +3,18 @@ from tkinter import Frame,Label
 class Juego:
 
     def __init__(self,nombre,render_logo,precio_original,ventana):
-
         """
-        Class constructor:
-            Load values of intance and create the visual component (TKinter frame) for this object.
+        Constructor de clase:
+            Carga valores a la instancia y crea el Tkinter frame para este objeto
             
-            Parameters:
-                nombre: string
-                render_logo = ImageTk object , not work create the ImageTk in the class with de direction of image
-                precio_original = float
-                ventana = Tk
+        Parametro:
+            nombre: string
+            render_logo = ImageTk object , not work create the ImageTk in the class with de direction of image
+            precio_original = float
+            ventana = Tk
 
-            Returns:
-                None
-        
+        Retorna:
+            None
         """
 
         self.precio_original = precio_original
@@ -52,7 +50,5 @@ class Juego:
         self.frame.pack(fill="x", expand="yes",anchor="n")
 
     def getPrecioFinal(self):
-
-        """Getter of precio_final"""
 
         return self.precio_final

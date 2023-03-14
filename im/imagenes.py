@@ -4,13 +4,13 @@ import requests
 def cargarImagen(direccion_imagen):
 
     """
-    Function that generates the ImageTk object from a image direction
+    Funcion que genera el objeto ImageTk de una direccion de imagen
     
-        Parameter:
-            direccion_imagen: string ,  image local direction 
+        Parametros:
+            direccion_imagen: string ,  direccion local de la imagen
         
-        Returns:
-            render : ImageTk object from the image
+        Returna:
+            render : ImageTk de la imagen
     """
     imagen = Image.open(direccion_imagen)
     render = ImageTk.PhotoImage(imagen)
@@ -18,14 +18,15 @@ def cargarImagen(direccion_imagen):
     return render
 
 def descargarImagen(url_imagen, nombre_juego):
+    """
+    Funcion que descarga una imagen de una url mediante libreria request
 
-    """_summary_
+    Parametros:
+        url_imagen (str): url de la image 
+        nombre_juego (str_): nombre del juego, usado para el archivo de la imagen
 
-    Args:
-        url_imagen (str): url of the image 
-        nombre_juego (str_): name of game, used for the image archive
-    Return:
-        direction local of the image
+    Retorna:
+        direccion local de la imagen descargada
     """
 
     direccion_local_imagen = f"./images/{nombre_juego}.jpg" # El nombre con el que queremos guardarla

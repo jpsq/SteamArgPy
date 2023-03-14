@@ -44,15 +44,28 @@ class Window:
         self.ventana.mainloop()
 
     def agregar(self):
+        """
+        Funcion que agrega a la lista de juegos de la clase un juego nuevo, tomando los datos del campo de entrada
+        y haciendo scraping con la clase scrapper ("sc"), descargando y generando la imagen para luego crear
+        el juego con su constructor (el juego renderiza su propia vista en esta ventana).
+    
+        Parameter:
+            None
+        
+        Returns:
+            None
+        """
 
         datos_juego = sc.obtener(self.entrada.get())
         render = im.cargarImagen( im.descargarImagen(datos_juego[2], self.entrada.get().replace(" ", "_") ) )
         self.lista_juegos.insert( len(self.lista_juegos), mod.Juego(datos_juego[0], render, datos_juego[1],  self.getFrameGrid())) 
         
+        #es necesario asctualizar para evitar retrasos en la actualizacion del scrollbar
         self.frame.update()
         self.mycanvas.update()
         self.myframe.update()
-    
+
+        #reconfiguro el scrollbar para el nuevo tamaño del canvas y re renderizo el frame
         self.mycanvas.configure(scrollregion = self.mycanvas.bbox("all"))
         self.frame.pack(fill="both", expand="yes", padx=10, pady=10)
     
