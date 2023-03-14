@@ -26,10 +26,9 @@ class Juego:
         self.frame = Frame(ventana)
         self.frame.config(
             bg= "#16202D",
-            highlightbackground="black",
-            highlightthickness=2
+            border=3,
+            relief="solid"
         )
-
         #label imagen
         labelImagen = Label(self.frame, image=self.render_logo)
         labelImagen.config(bg="black")

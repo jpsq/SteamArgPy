@@ -8,11 +8,15 @@ class Window:
     def __init__(self):
         self.ventana=Tk()
         self.ventana.title("Steam Arg Py")
-        self.ventana.geometry("345x300")
+        self.ventana.geometry("450x300")
         self.ventana.resizable(1,0)
-        self.ancho = 340
+        self.ancho = 400
 
+        self.total = 0
         self.lista_juegos = list()
+
+        self.label_total = Label(self.ventana, text= f"Total: ${self.total}")
+        self.label_total.pack()
 
         self.entrada = StringVar()
         Entry(self.ventana, textvariable=self.entrada).pack()
@@ -86,5 +90,20 @@ class Window:
         #actualizar ancho de la ventana   
         self.ajustar_ancho_ventana(self.lista_juegos[-1].getFrame().winfo_reqwidth())
 
+        self.actualizar_total(self.lista_juegos[-1].getPrecioFinal())
+
+    def actualizar_total(self, precio):
+        """
+        La funcion actualiza el valor del total, y el label de la ventana que lo muestra
+
+        Parametros:
+            precio (int): precio del ultimo juego agregado
+
+        Retorna:
+            None
+        """
+        self.total += precio
+        self.label_total.config(text=f"Total: ${format(self.total, '0.2f')}")
+        
 
         
