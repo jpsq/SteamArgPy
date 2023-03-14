@@ -8,8 +8,8 @@ class Window:
     def __init__(self):
         self.ventana=Tk()
         self.ventana.title("Steam Arg Py")
-        self.ventana.geometry("500x400")
-        self.ventana.resizable(0,0)
+        self.ventana.geometry("800x500")
+        self.ventana.resizable(1,0)
 
         self.lista_juegos = list()
 
@@ -18,16 +18,18 @@ class Window:
         self.bBusqueda = Button(self.ventana,text="Agregar juego", command=self.agregar).pack()
 
         self.frame = LabelFrame(self.ventana)
+        self.frame.config(bg= "#16202D")
 
         self.mycanvas = Canvas(self.frame)
         self.mycanvas.pack(side=LEFT,fill="both", expand="yes")
+        self.mycanvas.config(bg= "#16202D")
 
         self.yscrollbar = Scrollbar (self.frame, orient="vertical", command=self.mycanvas.yview )
         self.yscrollbar.pack(side=RIGHT, fill="y")
 
         self.mycanvas.configure(yscrollcommand=self.yscrollbar.set)
         #cuando el canva cambie de tamaño, tmb ajusto la region de desplazamiento del scroll (creo que esta linea en este caso no funciona, por eso la agregue en el metodo agregar)
-        self.mycanvas.bind('<Configure>', lambda e: self.mycanvas.configure(scrollregion = self.mycanvas.bbox('all')))
+        #self.mycanvas.bind('<Configure>', lambda e: self.mycanvas.configure(scrollregion = self.mycanvas.bbox('all')))
 
         self.myframe = Frame(self.mycanvas)
 
@@ -47,6 +49,10 @@ class Window:
         render = im.cargarImagen( im.descargarImagen(datos_juego[2], self.entrada.get().replace(" ", "_") ) )
         self.lista_juegos.insert( len(self.lista_juegos), mod.Juego(datos_juego[0], render, datos_juego[1],  self.getFrameGrid())) 
         
-        self.mycanvas.configure(scrollregion = self.mycanvas.bbox('all'))
+        self.frame.update()
+        self.mycanvas.update()
+        self.myframe.update()
+    
+        self.mycanvas.configure(scrollregion = self.mycanvas.bbox("all"))
         self.frame.pack(fill="both", expand="yes", padx=10, pady=10)
     

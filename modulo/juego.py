@@ -49,7 +49,7 @@ class Juego:
         labelPrecioFinal.config(fg="#C5C3C0",bg="#16202D")
         labelPrecioFinal.pack(anchor="s", side="bottom")
         
-        self.frame.pack(fill="x", expand="yes",anchor="w")
+        self.frame.pack(fill="x", expand="yes",anchor="n")
 
     def getPrecioFinal(self):
 
