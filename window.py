@@ -8,8 +8,9 @@ class Window:
     def __init__(self):
         self.ventana=Tk()
         self.ventana.title("Steam Arg Py")
-        self.ventana.geometry("800x500")
+        self.ventana.geometry("345x300")
         self.ventana.resizable(1,0)
+        self.ancho = 340
 
         self.lista_juegos = list()
 
@@ -32,6 +33,7 @@ class Window:
         #self.mycanvas.bind('<Configure>', lambda e: self.mycanvas.configure(scrollregion = self.mycanvas.bbox('all')))
 
         self.myframe = Frame(self.mycanvas)
+        self.myframe.config(bg= "#16202D")
 
         self.mycanvas.create_window((0,0), window=self.myframe, anchor="nw")
 
@@ -42,6 +44,18 @@ class Window:
     
     def iniciar(self):
         self.ventana.mainloop()
+
+    def ajustar_ancho_ventana(self, ancho_juego_agregado):
+        """
+        Funcion que checkea si el ancho viejo de la ventana necesita ajustarse al agregar un juego de ancho mayor
+
+        Parametros:
+            ancho_juego_agregado int: ancho del ultimo juego agregado
+        Retorna: None
+        """
+        self.ancho = self.mycanvas.winfo_reqwidth()
+        if(ancho_juego_agregado > self.ancho):
+            self.ventana.geometry(f"{ancho_juego_agregado+40}x300") #40 extra por el scrollbar
 
     def agregar(self):
         """
@@ -68,4 +82,9 @@ class Window:
         #reconfiguro el scrollbar para el nuevo tamaño del canvas y re renderizo el frame
         self.mycanvas.configure(scrollregion = self.mycanvas.bbox("all"))
         self.frame.pack(fill="both", expand="yes", padx=10, pady=10)
-    
+
+        #actualizar ancho de la ventana   
+        self.ajustar_ancho_ventana(self.lista_juegos[-1].getFrame().winfo_reqwidth())
+
+
+        

@@ -26,6 +26,8 @@ class Juego:
         self.frame = Frame(ventana)
         self.frame.config(
             bg= "#16202D",
+            highlightbackground="black",
+            highlightthickness=2
         )
 
         #label imagen
@@ -50,5 +52,7 @@ class Juego:
         self.frame.pack(fill="x", expand="yes",anchor="n")
 
     def getPrecioFinal(self):
-
         return self.precio_final
+    
+    def getFrame(self):
+        return self.frame
