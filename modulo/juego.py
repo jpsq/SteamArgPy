@@ -27,7 +27,7 @@ class Juego:
         """
 
         self.__precio_original = precio_original
-        self.__precio_final = self.__precio_original * 1.65 #esto dsp hacer con scraping de impuestos
+        self.__precio_final = self.__precio_original * 1.75
         self.__nombre = nombre
         self.__render_logo = render_logo
         self.__controlador = controlador
