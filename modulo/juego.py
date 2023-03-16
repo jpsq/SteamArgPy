@@ -1,4 +1,4 @@
-from tkinter import Frame,Label,Button
+from tkinter import Frame,Label,Button,Checkbutton,IntVar
 
 class Juego:
 
@@ -42,25 +42,40 @@ class Juego:
         #label imagen
         labelImagen = Label(self.__frame, image=self.__render_logo)
         labelImagen.config(bg="black")
-        labelImagen.pack(anchor="w",side="left", padx=5)
+        labelImagen.pack(anchor="w",side="left", padx=5,pady=3)
+
         #label titulo del juego
         labelNombre = Label(self.__frame, text=self.__nombre)
         labelNombre.config(bg="#16202D", fg="white", font=("",14))
-        labelNombre.pack(anchor="n", side="top")
+        labelNombre.pack(anchor="w",side="left",padx=7)
 
-        #label precio original
-        labelPrecioOriginal=Label(self.__frame, text=f"PRECIO ORIGINAL = ARS $"+format(self.__precio_original, '0.2f'))
+        #checkbutton activar/desactivar
+        self.__check_estado = IntVar()
+        self.__check_estado.set(1)
+        self.__check = Checkbutton(self.__frame,variable=self.__check_estado ,command=self.cambiar_estado)
+        self.__check.config(bg= "#16202D")
+        self.__check.pack(anchor="center",side="left")
+
+        self.__frame_de_labels = Frame(self.__frame)
+        self.__frame_de_labels.config(bg= "#16202D")
+
+        # #label precio original
+        labelPrecioOriginal=Label(self.__frame_de_labels, text=f"Precio base: ARS $"+format(self.__precio_original, '0.2f'))
         labelPrecioOriginal.config(bg="#16202D",fg="#C5C3C0")
-        labelPrecioOriginal.pack(anchor="s", side="bottom")
+        labelPrecioOriginal.pack(anchor="w",side="top", pady=2)
 
-        #label precio final  
-        labelPrecioFinal = Label(self.__frame, text=f"PRECIO FINAL = ARS $"+format(self.__precio_final, '0.2f'))
+        # #label precio final  
+        labelPrecioFinal = Label(self.__frame_de_labels, text=f"Precio final: ARS $"+format(self.__precio_final, '0.2f'))
         labelPrecioFinal.config(fg="#C5C3C0",bg="#16202D")
-        labelPrecioFinal.pack(anchor="s", side="bottom")
+        labelPrecioFinal.pack(anchor="w",side="bottom", pady=2)
 
-        #botones quitar y deshabilitar
-        boton_borrar = Button(self.__frame, text="Quitar", command=self.borrar).pack()
+        self.__frame_de_labels.pack(anchor="w",side="left",padx=7)
+
+        # #boton quitar
+        Button(self.__frame, text="Quitar", command=self.borrar).pack(anchor="e",side="left", padx=7)
+
         
+
         self.__frame.pack(fill="x", expand="yes",anchor="n")
 
     def getPrecioFinal(self):
@@ -72,3 +87,9 @@ class Juego:
     def borrar(self):
         self.__frame.destroy()
         self.__controlador.borrar_juego(self)
+
+    def cambiar_estado(self):
+        if self.__check_estado.get()==0:
+            self.__controlador.desactivar_juego(self)
+        elif self.__check_estado.get()==1:
+            self.__controlador.activar_juego(self)

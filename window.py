@@ -8,8 +8,8 @@ class Window:
 
         self.__ventana=Tk()
         self.__ventana.title("Steam Arg Py")
-        self.__ventana.geometry("450x300")
-        self.__ventana.resizable(1,0)
+        self.__ventana.geometry("600x600")
+        self.__ventana.resizable(1,1)
         self.__ancho = 400
 
         self.__total = 0
@@ -35,8 +35,6 @@ class Window:
         self.__scrollbar.pack(side=RIGHT, fill="y")
 
         self.__canvas.configure(yscrollcommand=self.__scrollbar.set)
-        #cuando el canva cambie de tamaño, tmb ajusto la region de desplazamiento del scroll (creo que esta linea en este caso no funciona, por eso la agregue en el metodo agregar)
-        #self.mycanvas.bind('<Configure>', lambda e: self.mycanvas.configure(scrollregion = self.mycanvas.bbox('all')))
 
         self.__frame_canva = Frame(self.__canvas)
         self.__frame_canva.config(bg= "#16202D")
@@ -50,18 +48,6 @@ class Window:
     
     def iniciar(self):
         self.__ventana.mainloop()
-
-    def ajustar_ancho_ventana(self, ancho_juego_agregado):
-        """
-        Funcion que checkea si el ancho viejo de la ventana necesita ajustarse al agregar un juego de ancho mayor
-
-        Parametros:
-            ancho_juego_agregado int: ancho del ultimo juego agregado
-        Retorna: None
-        """
-        self.__ancho = self.__canvas.winfo_reqwidth()
-        if(ancho_juego_agregado > self.__ancho):
-            self.__ventana.geometry(f"{ancho_juego_agregado+40}x300") #40 extra por el scrollbar
 
     def actualizarFrames(self):
         #es necesario asctualizar para evitar retrasos en la actualizacion del scrollbar
@@ -94,3 +80,17 @@ class Window:
     def agregar(self, event):
     #esta funcion es especifica para el bindeo del enter
         self.__controlador.agregar(self.__entrada)
+
+    # def ajustar_ancho_ventana(self, ancho_juego_agregado):
+    #     """
+    #     Funcion que checkea si el ancho viejo de la ventana necesita ajustarse al agregar un juego de ancho mayor
+
+    #     Parametros:
+    #         ancho_juego_agregado int: ancho del ultimo juego agregado
+    #     Retorna: None
+    #     """
+    #     self.__ventana.update()
+    #     self.__ancho = self.__canvas.winfo_reqwidth()
+    #     if(ancho_juego_agregado > self.__ancho):
+    #         self.__ventana.geometry(f"{ancho_juego_agregado+40}x{self.__ventana.winfo_reqheight()}") #40 extra por el scrollbar
+    #         print(f"{ancho_juego_agregado+40}x{self.__ventana.winfo_reqheight()}")

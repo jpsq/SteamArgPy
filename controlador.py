@@ -17,7 +17,6 @@ class Controlador:
         self.__lista_juegos.append(mod.Juego(datos_juego[0], render, datos_juego[1],  self.__ventana.getFrameGrid(),self)) 
         
         self.__ventana.actualizarFrames()
-        self.__ventana.ajustar_ancho_ventana(self.__lista_juegos[-1].getFrame().winfo_reqwidth())
         self.__ventana.sumar_a_total(self.__lista_juegos[-1].getPrecioFinal())
 
     def iniciar(self):
@@ -26,3 +25,9 @@ class Controlador:
     def borrar_juego(self,juego_a_quitar):
         self.__ventana.quitar_a_total(juego_a_quitar.getPrecioFinal())
         self.__lista_juegos.remove(juego_a_quitar)
+
+    def desactivar_juego(self,juego_a_desactivar):
+        self.__ventana.quitar_a_total(juego_a_desactivar.getPrecioFinal())
+
+    def activar_juego(self,juego_a_activar):
+        self.__ventana.sumar_a_total(juego_a_activar.getPrecioFinal())
