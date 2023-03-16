@@ -22,20 +22,28 @@ def obtener(nombre_juego):
 
     url_a_scrappear = f"https://store.steampowered.com/search/?term=" + \
     nombre_juego.replace(" ", "+")
-    r = requests.get(url_a_scrappear)
-    soup = BeautifulSoup(r.text, 'lxml')
+    pagina = requests.get(url_a_scrappear)
+    soup = BeautifulSoup(pagina.text, 'lxml')
 
-    div = soup.find(class_="col search_capsule")
+    #cargo el primero elemento de la lista resultado de steam
+    div_principal = soup.find(class_="search_result_row")
+
+    div = div_principal.find(class_="col search_capsule")
     lista = div.contents
     datos_juego.insert(2, lista[0]["src"])  # url de la imagen
 
-    div = soup.find(class_="col search_name ellipsis")
+    div = div_principal.find(class_="col search_name ellipsis")
     lista = div.contents
-    datos_juego.insert(0, lista[1].get_text()) # valor de la etiqueta, en este caso el nombre dle juego
+    datos_juego.insert(0, lista[1].get_text()) # valor de la etiqueta, en este caso el nombre del juego
 
-    div = soup.find(class_="col search_price responsive_secondrow")
+    indice_lista = 0 #para caso inicial sin descuento
+    div = div_principal.find(class_="col search_price responsive_secondrow")
+    if div == None: #si no encontro el precio con esa clase, uso la clase para cuando esta en oferta
+        div = div_principal.find(class_="col search_price discounted responsive_secondrow")
+        indice_lista = 1 #para caso con descuento
     lista = div.contents
-    datos_juego.insert(1, lista[0].get_text().replace('.', '').replace(',', '.'))
+    
+    datos_juego.insert(1, lista[indice_lista].get_text().replace('.', '').replace(',', '.'))
     indice_inicia_numero = datos_juego[1].find('$')
     datos_juego[1] = float(
                         datos_juego[1][indice_inicia_numero+2: len(datos_juego[1])]
