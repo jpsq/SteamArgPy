@@ -1,4 +1,5 @@
 from PIL import Image,ImageTk
+from customtkinter import CTkImage
 import requests
 
 def cargarImagen(direccion_imagen):
@@ -12,10 +13,10 @@ def cargarImagen(direccion_imagen):
         Returna:
             render : ImageTk de la imagen
     """
-    imagen = Image.open(direccion_imagen)
-    render = ImageTk.PhotoImage(imagen)
+    imagen = CTkImage(dark_image=Image.open(direccion_imagen))
+    #render = ImageTk.PhotoImage(imagen)
 
-    return render
+    return imagen
 
 def descargarImagen(url_imagen, nombre_juego):
     """
