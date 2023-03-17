@@ -1,8 +1,6 @@
 from tkinter import *
 from customtkinter import *
 
-
-
 class Window:
 
     def __init__(self,controlador):
@@ -27,7 +25,8 @@ class Window:
         self.__campo_entrada.bind('<Return>', self.agregar)
         self.__campo_entrada.pack()
 
-        self.__boton_busqueda = CTkButton(master=self.__ventana,text="Agregar juego", command=lambda: controlador.agregar(self.__entrada)).pack()
+        #boton de busqueda
+        CTkButton(master=self.__ventana,text="Agregar juego", command=lambda: controlador.agregar(self.__entrada)).pack()
 
         self.__frame = CTkFrame(master=self.__ventana)
 

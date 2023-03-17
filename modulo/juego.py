@@ -1,5 +1,5 @@
-from tkinter import Frame,Label,Button,Checkbutton,IntVar
-from customtkinter import *
+from tkinter import Checkbutton,IntVar
+from customtkinter import CTkFrame,CTkLabel,CTkButton
 
 class Juego:
 
@@ -35,19 +35,13 @@ class Juego:
 
         #agrego los elementos a el frame del juego q desp se cargara en la ventana pasada por parametro
         self.__frame = CTkFrame(master=ventana)
-        # self.__frame.config(
-        #     bg= "#16202D",
-        #     border=3,
-        #     relief="solid"
-        # )
+
         #label imagen
         labelImagen = CTkLabel(master=self.__frame, text="",image=self.__render_logo)
-        #labelImagen.config(bg="black")
         labelImagen.pack(anchor="w",side="left", padx=5,pady=3)
 
         #label titulo del juego
         labelNombre = CTkLabel(master=self.__frame, text=self.__nombre)
-        #labelNombre.config(bg="#16202D", fg="white", font=("",14))
         labelNombre.pack(anchor="w",side="left",padx=7)
 
         #checkbutton activar/desactivar
@@ -58,21 +52,18 @@ class Juego:
         self.__check.pack(anchor="center",side="left")
 
         self.__frame_de_labels = CTkFrame(master=self.__frame,fg_color="#212121")
-        #self.__frame_de_labels.config(bg= "#16202D")
 
         # #label precio original
         labelPrecioOriginal=CTkLabel(master=self.__frame_de_labels, text=f"Precio base: ARS $"+format(self.__precio_original, '0.2f'))
-        #labelPrecioOriginal.config(bg="#16202D",fg="#C5C3C0")
         labelPrecioOriginal.pack(anchor="w",side="top", pady=2)
 
         # #label precio final  
         labelPrecioFinal = CTkLabel(master=self.__frame_de_labels, text=f"Precio final: ARS $"+format(self.__precio_final, '0.2f'))
-        #labelPrecioFinal.config(fg="#C5C3C0",bg="#16202D")
         labelPrecioFinal.pack(anchor="w",side="bottom", pady=2)
 
         self.__frame_de_labels.pack(anchor="w",side="left",padx=7)
 
-        # #boton quitar
+        #boton quitar
         CTkButton(master=self.__frame, text="Quitar", command=self.borrar).pack(anchor="e",side="left", padx=7)
 
         self.__frame.pack(fill="x", expand="yes",anchor="n")
