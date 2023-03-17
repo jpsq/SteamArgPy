@@ -35,12 +35,12 @@ class Window:
         self.__canvas.config(bg="#1A1A1A")
         self.__canvas.pack(side=LEFT,fill="both", expand="yes")
         #scrollbar
-        self.__scrollbar = Scrollbar(self.__frame, orient="vertical", command=self.__canvas.yview )
+        self.__scrollbar = Scrollbar(self.__frame, orient="vertical", command=self.__canvas.yview)
         self.__scrollbar.pack(side=RIGHT, fill="y")
         #config scrollbar to canva
         self.__canvas.configure(yscrollcommand=self.__scrollbar.set)
 
-        self.__frame_canva = CTkFrame(master=self.__canvas,fg_color="#1A1A1A")
+        self.__frame_canva = Frame(master=self.__canvas,bg="#1A1A1A")
 
         self.__canvas.create_window((0,0), window=self.__frame_canva, anchor="nw")
 

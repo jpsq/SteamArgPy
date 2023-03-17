@@ -13,7 +13,7 @@ def cargarImagen(direccion_imagen):
         Returna:
             render : ImageTk de la imagen
     """
-    imagen = CTkImage(dark_image=Image.open(direccion_imagen))
+    imagen = CTkImage(dark_image=Image.open(direccion_imagen),size=(120,45))
     #render = ImageTk.PhotoImage(imagen)
 
     return imagen
