@@ -88,7 +88,7 @@ class Window:
             None
         """
         self.__total -= precio
-        self.__label_total.config(text=f"Total: ${format(self.__total, '0.2f')}")
+        self.__label_total.configure(text=f"Total: ${format(self.__total, '0.2f')}")
         
     def agregar(self, event):
     #esta funcion es especifica para el bindeo del enter
