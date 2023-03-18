@@ -7,7 +7,7 @@ El proyecto utiliza web scraping con BeautifulSoup para tomar datos de la web de
 Instalación:
 En /build se encuentra un .zip con un empaquetado para Windows.
 
-Imagen de muestra:
+![Imagen de muestra]
 (https://raw.githubusercontent.com/jpsq/SteamArgPy/master/preview.png)
 
 
