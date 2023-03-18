@@ -41,7 +41,7 @@ class Juego:
         labelImagen.pack(anchor="w",side="left", padx=5,pady=3)
 
         #label titulo del juego
-        labelNombre = CTkLabel(master=self.__frame, text=self.__nombre)
+        labelNombre = CTkLabel(master=self.__frame, text=self.__nombre, font=("",22))
         labelNombre.pack(anchor="w",side="left",padx=7)
 
         #checkbutton activar/desactivar
@@ -83,3 +83,6 @@ class Juego:
             self.__controlador.desactivar_juego(self)
         elif self.__check_estado.get()==1:
             self.__controlador.activar_juego(self)
+    
+    def getCheck_estado(self):
+        return self.__check_estado.get()

@@ -12,21 +12,39 @@ class Window:
 
         self.__ventana=CTk()
         self.__ventana.title("Steam Arg Py")
-        self.__ventana.geometry("600x600")
+        self.__ventana.geometry("800x600")
+        self.__ventana.minsize(415,400)
         self.__ventana.resizable(1,1)
 
         self.__total = 0
 
-        self.__label_total = CTkLabel(master=self.__ventana, text= f"Total: ${self.__total}")
-        self.__label_total.pack()
-
         self.__entrada = StringVar()
-        self.__campo_entrada = CTkEntry(master=self.__ventana, textvariable=self.__entrada)
+        self.__campo_entrada = CTkEntry(
+            master=self.__ventana,
+            textvariable=self.__entrada,
+            height=25,
+            width=300,
+            font=("",17),
+        )
         self.__campo_entrada.bind('<Return>', self.agregar)
-        self.__campo_entrada.pack()
+        self.__campo_entrada.pack(
+            pady=7,
+            padx=10,
+            anchor="nw"
+        )
 
         #boton de busqueda
-        CTkButton(master=self.__ventana,text="Agregar juego", command=lambda: controlador.agregar(self.__entrada)).pack()
+        CTkButton(
+            master=self.__ventana,
+            text="Agregar juego",
+            font=("",15),
+            command=lambda: controlador.agregar(self.__entrada),
+            height=25,
+        ).pack(
+            padx=10,
+            pady=3,
+            anchor="nw"
+        )
 
         self.__frame = CTkFrame(master=self.__ventana)
 
@@ -34,7 +52,11 @@ class Window:
         self.__canvas.config(bg="#1A1A1A")
         self.__canvas.pack(side=LEFT,fill="both", expand="yes")
         #scrollbar
-        self.__scrollbar = Scrollbar(self.__frame, orient="vertical", command=self.__canvas.yview)
+        self.__scrollbar = Scrollbar(
+            self.__frame,
+            orient="vertical",
+            command=self.__canvas.yview
+        )
         self.__scrollbar.pack(side=RIGHT, fill="y")
         #config scrollbar to canva
         self.__canvas.configure(yscrollcommand=self.__scrollbar.set)
@@ -43,7 +65,23 @@ class Window:
 
         self.__canvas.create_window((0,0), window=self.__frame_canva, anchor="nw")
 
-        self.__frame.pack(fill="both", expand="yes", padx=10, pady=10)
+        self.__frame.pack(
+            fill="both",
+            expand="yes",
+            padx=10,
+            pady=10
+        )
+
+        self.__label_total = CTkLabel(master=self.__ventana)
+        self.__label_total.configure(
+            text= f"Total: ARS ${self.__total}",
+            font=("",22),    
+        )
+        self.__label_total.pack(
+            pady=10,
+            padx=10,
+            anchor="w"
+        )
 
     def getFrameGrid(self):
         return self.__frame_canva
@@ -92,3 +130,4 @@ class Window:
     def agregar(self, event):
     #esta funcion es especifica para el bindeo del enter
         self.__controlador.agregar(self.__entrada)
+        self.__campo_entrada.delete(0,len(self.__campo_entrada.get())) #limpiar campo

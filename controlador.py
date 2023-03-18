@@ -13,8 +13,8 @@ class Controlador:
 
     def agregar(self,entrada):
         datos_juego = sc.obtener(entrada.get())
-        render = im.cargarImagen( im.descargarImagen(datos_juego[2], entrada.get().replace(" ", "_") ) )
-        self.__lista_juegos.append(mod.Juego(datos_juego[0], render, datos_juego[1],  self.__ventana.getFrameGrid(),self)) 
+        logo_juego = im.cargarImagen( im.descargarImagen(datos_juego[2], entrada.get().replace(" ", "_") ) )
+        self.__lista_juegos.append(mod.Juego(datos_juego[0], logo_juego, datos_juego[1],  self.__ventana.getFrameGrid(),self)) 
         
         self.__ventana.actualizarFrames()
         self.__ventana.sumar_a_total(self.__lista_juegos[-1].getPrecioFinal())
@@ -23,8 +23,11 @@ class Controlador:
         self.__ventana.iniciar()
 
     def borrar_juego(self,juego_a_quitar):
-        self.__ventana.quitar_a_total(juego_a_quitar.getPrecioFinal())
+        if juego_a_quitar.getCheck_estado() == 1:
+            self.__ventana.quitar_a_total(juego_a_quitar.getPrecioFinal())
+        
         self.__lista_juegos.remove(juego_a_quitar)
+
 
     def desactivar_juego(self,juego_a_desactivar):
         self.__ventana.quitar_a_total(juego_a_desactivar.getPrecioFinal())
