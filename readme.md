@@ -7,7 +7,7 @@ El proyecto utiliza web scraping con BeautifulSoup para tomar datos de la web de
 Instalación:
 En /build se encuentra un .zip con un empaquetado para Windows.
 
-![](https://pandao.github.io/editor.md/images/logos/editormd-logo-180x180.png)
+![](https://github.com/jpsq/SteamArgPy/blob/master/preview.png?raw=true)
 
 
 ###
