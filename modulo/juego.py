@@ -26,9 +26,12 @@ class Juego:
         Retorna:
             None
         """
-
+        self.__free_to_play = False
         self.__precio_original = precio_original
-        self.__precio_final = self.__precio_original * 1.75
+        if(type(self.__precio_original)==float):
+            self.__precio_final = self.__precio_original * 1.75
+        else:
+            self.__free_to_play = True
         self.__nombre = nombre
         self.__render_logo = render_logo
         self.__controlador = controlador
@@ -44,27 +47,33 @@ class Juego:
         labelNombre = CTkLabel(master=self.__frame, text=self.__nombre, font=("",22))
         labelNombre.pack(anchor="w",side="left",padx=7)
 
-        #checkbutton activar/desactivar
-        self.__check_estado = IntVar()
-        self.__check_estado.set(1)
-        self.__check = Checkbutton(self.__frame,variable=self.__check_estado ,command=self.cambiar_estado)
-        self.__check.config(bg= "#212121")
-        self.__check.pack(anchor="center",side="left")
-
         self.__frame_de_labels = CTkFrame(master=self.__frame,fg_color="#212121")
 
-        # #label precio original
-        labelPrecioOriginal=CTkLabel(master=self.__frame_de_labels, text=f"Precio base: ARS $"+format(self.__precio_original, '0.2f'))
-        labelPrecioOriginal.pack(anchor="w",side="top", pady=2)
+        if(self.__free_to_play==True):
+            #label precio original
+            labelPrecioOriginal=CTkLabel(master=self.__frame_de_labels, text="Free to Play")
+        else:
+            #checkbutton activar/desactivar
+            self.__check_estado = IntVar()
+            self.__check_estado.set(1)
+            self.__check = Checkbutton(self.__frame,variable=self.__check_estado ,command=self.cambiar_estado)
+            self.__check.config(bg= "#212121")
+            self.__check.pack(anchor="center",side="left")
 
-        # #label precio final  
-        labelPrecioFinal = CTkLabel(master=self.__frame_de_labels, text=f"Precio final: ARS $"+format(self.__precio_final, '0.2f'))
-        labelPrecioFinal.pack(anchor="w",side="bottom", pady=2)
+            labelPrecioOriginal=CTkLabel(master=self.__frame_de_labels, text=f"Precio base: ARS $"+format(self.__precio_original, '0.2f'))
+            #label precio final  
+            self.__labelPrecioFinal = CTkLabel(master=self.__frame_de_labels, text=f"Precio final: ARS $"+format(self.__precio_final, '0.2f'))
+            self.__labelPrecioFinal.pack(anchor="w",side="bottom", pady=2)
+            
+        labelPrecioOriginal.pack(anchor="w",side="top", pady=2)
 
         self.__frame_de_labels.pack(anchor="w",side="left",padx=7)
 
         #boton quitar
-        CTkButton(master=self.__frame, text="Quitar", command=self.borrar).pack(anchor="e",side="left", padx=7)
+        if(self.__free_to_play==True):
+            CTkButton(master=self.__frame, text="Quitar", command=self.__frame.destroy).pack(anchor="e",side="left", padx=7)
+        else:
+            CTkButton(master=self.__frame, text="Quitar", command=self.borrar).pack(anchor="e",side="left", padx=7)
 
         self.__frame.pack(fill="x", expand="yes",anchor="n")
 
