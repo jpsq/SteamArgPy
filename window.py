@@ -1,4 +1,4 @@
-from tkinter import *
+from tkinter import messagebox,Frame,Canvas,Scrollbar
 from customtkinter import *
 
 class Window:
@@ -131,3 +131,6 @@ class Window:
     #esta funcion es especifica para el bindeo del enter
         self.__controlador.agregar(self.__entrada)
         self.__campo_entrada.delete(0,len(self.__campo_entrada.get())) #limpiar campo
+    
+    def mostrar_alerta_juego_no_encontrado(self):
+        messagebox.showinfo("Juego no encontrado", "Steam no arrojo resultados para esta busqueda. Intente ser mas especifico.")

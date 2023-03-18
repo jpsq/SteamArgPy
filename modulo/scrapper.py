@@ -12,7 +12,8 @@ def obtener(nombre_juego):
         nombre_juego: string , string with the name of the game to search and scrap dates
 
     Returns:
-        datos_jueg: list(str,float,str) 
+        datos_juego: list(str,float,str)
+        0 : int , si no se encontro el juego
     """
 
     # cosas a devolver:  [titulo, precio, url_imagen]
@@ -25,6 +26,8 @@ def obtener(nombre_juego):
 
     #cargo el primero elemento de la lista resultado de steam
     div_principal = soup.find(class_="search_result_row")
+    if(div_principal==None):
+        return 0
 
     div = div_principal.find(class_="col search_capsule")
     lista = div.contents
