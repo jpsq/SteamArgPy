@@ -17,6 +17,8 @@ class Window:
         self.__ventana.resizable(1,1)
 
         self.__total = 0
+        self.__cantidad_juegos = 0
+        self.__cantidad_juegos_activos = 0
 
         self.__entrada = StringVar()
         self.__campo_entrada = CTkEntry(
@@ -72,13 +74,35 @@ class Window:
             pady=10
         )
 
+        self.__label_cantidad_juegos = CTkLabel(master=self.__ventana)
+        self.__label_cantidad_juegos.configure(
+            text= f"Cantidad juegos: {self.__cantidad_juegos}",
+            font=("",22),    
+        )
+        self.__label_cantidad_juegos.pack(
+            pady=1,
+            padx=10,
+            anchor="w"
+        )
+
+        self.__label_cantidad_juego_activos = CTkLabel(master=self.__ventana)
+        self.__label_cantidad_juego_activos.configure(
+            text= f"Cantidad juegos activos: {self.__cantidad_juegos_activos}",
+            font=("",22),    
+        )
+        self.__label_cantidad_juego_activos.pack(
+            pady=1,
+            padx=10,
+            anchor="w"
+        )
+
         self.__label_total = CTkLabel(master=self.__ventana)
         self.__label_total.configure(
             text= f"Total: ARS ${self.__total}",
-            font=("",22),    
+            font=("",22)
         )
         self.__label_total.pack(
-            pady=10,
+            pady=1,
             padx=10,
             anchor="w"
         )
@@ -134,3 +158,19 @@ class Window:
     
     def mostrar_alerta_juego_no_encontrado(self):
         messagebox.showinfo("Juego no encontrado", "Steam no arrojo resultados para esta busqueda. Intente ser mas especifico.")
+
+    def restarJuegoActivo(self):
+        self.__cantidad_juegos_activos -= 1
+        self.__label_cantidad_juego_activos.configure(text= f"Cantidad juegos activos: {self.__cantidad_juegos_activos}")
+
+    def sumarJuegoActivo(self):
+        self.__cantidad_juegos_activos += 1
+        self.__label_cantidad_juego_activos.configure(text= f"Cantidad juegos activos: {self.__cantidad_juegos_activos}")
+
+    def restarCantJuegos(self):
+        self.__cantidad_juegos -= 1
+        self.__label_cantidad_juegos.configure(text= f"Cantidad juegos: {self.__cantidad_juegos}")
+
+    def sumarCantJuegos(self):
+        self.__cantidad_juegos += 1
+        self.__label_cantidad_juegos.configure(text= f"Cantidad juegos: {self.__cantidad_juegos}")
