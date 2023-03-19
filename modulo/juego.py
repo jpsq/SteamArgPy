@@ -49,22 +49,33 @@ class Juego:
 
         self.__frame_de_labels = CTkFrame(master=self.__frame,fg_color="#212121")
 
-        if(self.__free_to_play):
+        if self.__free_to_play:
             #label precio original
             label_precio_original=CTkLabel(master=self.__frame_de_labels, text="Free to Play")
         else:
             #checkbutton activar/desactivar
             self.__check_estado = IntVar()
             self.__check_estado.set(1)
-            self.__check = Checkbutton(self.__frame,variable=self.__check_estado ,command=self.cambiar_estado)
+            self.__check = Checkbutton(
+                self.__frame,
+                variable=self.__check_estado,
+                command=self.cambiar_estado
+            )
             self.__check.config(bg= "#212121")
             self.__check.pack(anchor="center",side="left")
 
-            label_precio_original=CTkLabel(master=self.__frame_de_labels, text=f"Precio base: ARS $"+format(self.__precio_original, '0.2f'))
+            string_label = "Precio base: ARS $"
+            label_precio_original=CTkLabel(
+                master=self.__frame_de_labels,
+                text=f"{string_label}"+format(self.__precio_original, '0.2f')
+            )
             #label precio final  
-            self.__label_precio_final = CTkLabel(master=self.__frame_de_labels, text=f"Precio final: ARS $"+format(self.__precio_final, '0.2f'))
+            self.__label_precio_final = CTkLabel(
+                master=self.__frame_de_labels,
+                text=f"{string_label}"+format(self.__precio_final, '0.2f')
+            )
             self.__label_precio_final.pack(anchor="w",side="bottom", pady=2)
-            
+                     
         label_precio_original.pack(anchor="w",side="top", pady=2)
 
         self.__frame_de_labels.pack(anchor="w",side="left",padx=7)

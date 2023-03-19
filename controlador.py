@@ -13,11 +13,19 @@ class Controlador:
 
     def agregar(self,entrada):
         datos_juego = sc.obtener(entrada.get())
-        if(datos_juego==0):
+        if datos_juego==0:
             self.__ventana.mostrar_alerta_juego_no_encontrado()
         else:
-            logo_juego = im.cargarImagen( im.descargarImagen(datos_juego[2], entrada.get().replace(" ", "_") ) )
-            self.__lista_juegos.append(mod.Juego(datos_juego[0], logo_juego, datos_juego[1],  self.__ventana.getFrameGrid(),self)) 
+            logo_juego = im.cargarImagen(
+                im.descargarImagen(datos_juego[2], entrada.get().replace(" ", "_") )
+            )
+            self.__lista_juegos.append(
+                mod.Juego(datos_juego[0],
+                          logo_juego, datos_juego[1], 
+                          self.__ventana.getFrameGrid(),
+                          self
+                        )
+            )
             
             self.__ventana.actualizarFrames()
             self.__ventana.sumar_a_total(self.__lista_juegos[-1].getPrecioFinal())

@@ -165,7 +165,9 @@ class Window:
 
     def sumarJuegoActivo(self):
         self.__cantidad_juegos_activos += 1
-        self.__label_cantidad_juego_activos.configure(text= f"Cantidad juegos activos: {self.__cantidad_juegos_activos}")
+        self.__label_cantidad_juego_activos.configure(
+            text= f"Cantidad juegos activos: {self.__cantidad_juegos_activos}"
+        )
 
     def restarCantJuegos(self):
         self.__cantidad_juegos -= 1
@@ -174,3 +176,4 @@ class Window:
     def sumarCantJuegos(self):
         self.__cantidad_juegos += 1
         self.__label_cantidad_juegos.configure(text= f"Cantidad juegos: {self.__cantidad_juegos}")
+    
