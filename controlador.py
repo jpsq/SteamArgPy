@@ -29,9 +29,14 @@ class Controlador:
         self.__ventana.iniciar()
 
     def borrar_juego(self,juego_a_quitar):
-        if juego_a_quitar.getCheck_estado() == 1:
-            self.__ventana.quitar_a_total(juego_a_quitar.getPrecioFinal())
-        
+
+        if not juego_a_quitar.is_free_to_play():
+            if juego_a_quitar.getCheck_estado():
+                self.__ventana.quitar_a_total(juego_a_quitar.getPrecioFinal())
+                self.__ventana.restarJuegoActivo()
+        else:
+            self.__ventana.restarJuegoActivo()
+
         self.__lista_juegos.remove(juego_a_quitar)
         self.__ventana.restarCantJuegos()
 

@@ -70,10 +70,11 @@ class Juego:
         self.__frame_de_labels.pack(anchor="w",side="left",padx=7)
 
         #boton quitar
-        if(self.__free_to_play):
-            CTkButton(master=self.__frame, text="Quitar", command=self.__frame.destroy).pack(anchor="e",side="left", padx=7)
-        else:
-            CTkButton(master=self.__frame, text="Quitar", command=self.borrar).pack(anchor="e",side="left", padx=7)
+        CTkButton(
+            master=self.__frame,
+            text="Quitar",
+            command=self.borrar
+        ).pack(anchor="e",side="left", padx=7)
 
         self.__frame.pack(fill="x", expand="yes",anchor="n")
 
@@ -95,3 +96,6 @@ class Juego:
     
     def getCheck_estado(self):
         return self.__check_estado.get()
+    
+    def is_free_to_play(self):
+        return self.__free_to_play
