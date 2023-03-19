@@ -18,15 +18,15 @@ def obtener(nombre_juego):
 
     # cosas a devolver:  [titulo, precio, url_imagen]
     datos_juego = list()
-
-    url_a_scrappear = f"https://store.steampowered.com/search/?term=" + \
+    steam_url = "https://store.steampowered.com/search/?term="
+    url_a_scrappear = f"{steam_url}" + \
     nombre_juego.replace(" ", "+")
-    pagina = requests.get(url_a_scrappear)
+    pagina = requests.get(url_a_scrappear, timeout=10)
     soup = BeautifulSoup(pagina.text, 'lxml')
 
     #cargo el primero elemento de la lista resultado de steam
     div_principal = soup.find(class_="search_result_row")
-    if(div_principal==None):
+    if div_principal is None:
         return 0
 
     div = div_principal.find(class_="col search_capsule")
@@ -35,15 +35,16 @@ def obtener(nombre_juego):
 
     div = div_principal.find(class_="col search_name ellipsis")
     lista = div.contents
-    datos_juego.insert(0, lista[1].get_text()) # valor de la etiqueta, en este caso el nombre del juego
+    # valor de la etiqueta, en este caso el nombre del juego:
+    datos_juego.insert(0, lista[1].get_text()) 
 
     indice_lista = 0 #para caso inicial sin descuento
     div = div_principal.find(class_="col search_price responsive_secondrow")
-    if div == None: #si no encontro el precio con esa clase, uso la clase para cuando esta en oferta
+    if div is None: #si no encontro el precio con esa clase, uso la clase para cuando esta en oferta
         div = div_principal.find(class_="col search_price discounted responsive_secondrow")
         indice_lista = 1 #para caso con descuento
     lista = div.contents
-    
+       
     try:
         datos_juego.insert(1, lista[indice_lista].get_text().replace('.', '').replace(',', '.') )     
         indice_inicia_numero = datos_juego[1].find('$')
@@ -51,7 +52,7 @@ def obtener(nombre_juego):
     except ValueError:
         indice_inicia_numero = datos_juego[1].find('F')
         datos_juego[1] = datos_juego[1][indice_inicia_numero+2: len(datos_juego[1])]
-    except Exception as e:
-        print(f"Error {e=}, {type(e)=}")
+    except Exception as excepcion:
+        print(f"Error {excepcion=}, {type(excepcion)=}")
 
     return datos_juego
