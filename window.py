@@ -1,5 +1,5 @@
-from tkinter import messagebox,Frame,Canvas,Scrollbar
-from customtkinter import *
+from tkinter import messagebox,Frame,Canvas,Scrollbar,RIGHT,LEFT
+from customtkinter import set_appearance_mode,set_default_color_theme,StringVar,CTkEntry,CTk,CTkButton,CTkFrame,CTkLabel
 
 class Window:
 
@@ -40,7 +40,7 @@ class Window:
             master=self.__ventana,
             text="Agregar juego",
             font=("",15),
-            command=lambda: controlador.agregar(self.__entrada),
+            command=lambda: self.agregar(event=0),
             height=25,
         ).pack(
             padx=10,
@@ -77,7 +77,7 @@ class Window:
         self.__label_cantidad_juegos = CTkLabel(master=self.__ventana)
         self.__label_cantidad_juegos.configure(
             text= f"Cantidad juegos: {self.__cantidad_juegos}",
-            font=("",22),    
+            font=("",22)  
         )
         self.__label_cantidad_juegos.pack(
             pady=1,
@@ -88,7 +88,7 @@ class Window:
         self.__label_cantidad_juego_activos = CTkLabel(master=self.__ventana)
         self.__label_cantidad_juego_activos.configure(
             text= f"Cantidad juegos activos: {self.__cantidad_juegos_activos}",
-            font=("",22),    
+            font=("",22)
         )
         self.__label_cantidad_juego_activos.pack(
             pady=1,
@@ -150,18 +150,29 @@ class Window:
         """
         self.__total -= precio
         self.__label_total.configure(text=f"Total: ${format(self.__total, '0.2f')}")
-        
+
     def agregar(self, event):
     #esta funcion es especifica para el bindeo del enter
-        self.__controlador.agregar(self.__entrada)
-        self.__campo_entrada.delete(0,len(self.__campo_entrada.get())) #limpiar campo
-    
+        if len(self.__entrada.get())==0:
+            messagebox.showinfo(
+                "Campo de entrada vacio",
+                "Debe ingresar un nombre valido."
+            )
+        else:
+            self.__controlador.agregar(self.__entrada)
+            self.__campo_entrada.delete(0,len(self.__campo_entrada.get())) #limpiar campo
+
     def mostrar_alerta_juego_no_encontrado(self):
-        messagebox.showinfo("Juego no encontrado", "Steam no arrojo resultados para esta busqueda. Intente ser mas especifico.")
+        messagebox.showinfo(
+            "Juego no encontrado",
+            "Steam no arrojo resultados para esta busqueda. Intente ser mas especifico."
+        )
 
     def restarJuegoActivo(self):
         self.__cantidad_juegos_activos -= 1
-        self.__label_cantidad_juego_activos.configure(text= f"Cantidad juegos activos: {self.__cantidad_juegos_activos}")
+        self.__label_cantidad_juego_activos.configure(
+            text= f"Cantidad juegos activos: {self.__cantidad_juegos_activos}"
+        )
 
     def sumarJuegoActivo(self):
         self.__cantidad_juegos_activos += 1

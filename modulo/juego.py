@@ -18,9 +18,9 @@ class Juego:
             
         Parametro:
             nombre: string
-            render_logo = ImageTk object , not work create the ImageTk in the class with de direction of image
-            precio_original = float
-            ventana = Tk Frame,  en en donde se inserta el frame del juego
+            render_logo = 
+            precio_original = 
+            ventana = 
             ventana_principal = clase window (w), 
 
         Retorna:
@@ -36,7 +36,7 @@ class Juego:
         self.__render_logo = render_logo
         self.__controlador = controlador
 
-        #agrego los elementos a el frame del juego q desp se cargara en la ventana pasada por parametro
+        #agrego los elementos al frame del juego, desp se cargara en la ventana pasada por parametro
         self.__frame = CTkFrame(master=ventana)
 
         #label imagen
@@ -75,7 +75,7 @@ class Juego:
                 text=f"{string_label}"+format(self.__precio_final, '0.2f')
             )
             self.__label_precio_final.pack(anchor="w",side="bottom", pady=2)
-                     
+
         label_precio_original.pack(anchor="w",side="top", pady=2)
 
         self.__frame_de_labels.pack(anchor="w",side="left",padx=7)
@@ -91,7 +91,7 @@ class Juego:
 
     def getPrecioFinal(self):
         return self.__precio_final
-    
+
     def getFrame(self):
         return self.__frame
 
@@ -104,9 +104,9 @@ class Juego:
             self.__controlador.desactivar_juego(self)
         elif self.__check_estado.get()==1:
             self.__controlador.activar_juego(self)
-    
+
     def getCheck_estado(self):
         return self.__check_estado.get()
-    
+
     def is_free_to_play(self):
         return self.__free_to_play
