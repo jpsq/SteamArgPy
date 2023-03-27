@@ -2,18 +2,20 @@ from PIL import Image
 from customtkinter import CTkImage
 import requests
 
+
 def cargarImagen(direccion_imagen):
     """
     Funcion que genera el objeto CTkImage (customtkinter object) a partir de una direccion de imagen
-    
+
         Parametros:
             direccion_imagen: string , direccion local de la imagen       
         Returna:
             imagen : CTkImage de la imagen
     """
 
-    imagen = CTkImage(dark_image=Image.open(direccion_imagen),size=(120,45))
+    imagen = CTkImage(dark_image=Image.open(direccion_imagen), size=(120, 45))
     return imagen
+
 
 def descargarImagen(url_imagen, nombre_juego):
     """
@@ -26,8 +28,9 @@ def descargarImagen(url_imagen, nombre_juego):
         direccion local de la imagen descargada
     """
 
-    direccion_local_imagen = f"./images/{nombre_juego}.jpg" # El nombre con el que queremos guardarla
-    imagen = requests.get(url_imagen).content
+    # El nombre con el que queremos guardarla
+    direccion_local_imagen = f"./images/{nombre_juego}.jpg"
+    imagen = requests.get(url_imagen, timeout=10).content
 
     file = open(direccion_local_imagen, 'wb')
     try:
@@ -36,4 +39,3 @@ def descargarImagen(url_imagen, nombre_juego):
         file.close()
 
     return direccion_local_imagen
-
