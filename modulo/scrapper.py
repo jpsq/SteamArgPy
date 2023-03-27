@@ -39,12 +39,20 @@ def obtener(nombre_juego):
     # valor de la etiqueta, en este caso el nombre del juego:
     datos_juego.insert(0, lista[1].get_text())
 
+    """
+    Para el caso inicial SIN descuento, div.contents devolvera una lista de 1 elemento,
+    por lo cual deberemos acceder al dato a traves del indice 0
+
+    Para el caso CON descuento, el div.contents devuelve una lista de 4 elementos
+    (salto de linea, precio sin descuento, <br>,precio con descuento), por lo cual accederemos al dato
+    de precio con descuento con el indice 3
+    """
     indice_lista = 0  # para caso inicial sin descuento
     div = div_principal.find(class_="col search_price responsive_secondrow")
     if div is None:  # si no encontro el precio con esa clase, uso la clase para cuando esta en oferta
         div = div_principal.find(
             class_="col search_price discounted responsive_secondrow")
-        indice_lista = 1  # para caso con descuento
+        indice_lista = 3  # para caso con descuento
     lista = div.contents
 
     try:
@@ -59,5 +67,7 @@ def obtener(nombre_juego):
                                         2: len(datos_juego[1])]
     except Exception as excepcion:
         print(f"Error {excepcion=}, {type(excepcion)=}")
+
+    print(datos_juego[1])
 
     return datos_juego

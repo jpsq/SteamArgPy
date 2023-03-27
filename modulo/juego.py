@@ -28,7 +28,7 @@ class Juego:
         """
         self.__free_to_play = False
         self.__precio_original = precio_original
-        if isinstance(self.__precio_original, float) or isinstance(self.__precio_original, int):
+        if isinstance(self.__precio_original, float):
             self.__precio_final = self.__precio_original * 1.75
         else:
             self.__free_to_play = True
