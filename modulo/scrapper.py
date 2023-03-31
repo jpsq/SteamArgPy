@@ -68,6 +68,4 @@ def obtener(nombre_juego):
     except Exception as excepcion:
         print(f"Error {excepcion=}, {type(excepcion)=}")
 
-    print(datos_juego[1])
-
     return datos_juego
