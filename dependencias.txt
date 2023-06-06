@@ -1,3 +1,5 @@
+dependencias:
+
 tkinter
 customtkinter
 pillow (PIL)
