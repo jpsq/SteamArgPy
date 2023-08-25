@@ -1,5 +1,7 @@
 ### SteamArgPy
 
+(OUTDATED) Debido a cambios en la pagina web de Steam, la aplicacion no funciona correctamente hasta un proximo fix.
+
 Carrito de Steam, proyecto realizado para aprender Python y GUIs con Tkinter.
 
 El proyecto utiliza web scraping con BeautifulSoup para tomar datos de la web de "https://store.steampowered.com/", para luego visualizar un carrito de compras (con impuestos Argentinos incluidos) en una interfaz de Tkinter con la libreria "https://github.com/TomSchimansky/CustomTkinter" (CustomTkinter).
