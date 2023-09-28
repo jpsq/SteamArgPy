@@ -17,3 +17,6 @@ Los juegos pueden quitarse o en su lugar desactivarse para que ya no cuenten en 
 
 ![](https://github.com/jpsq/SteamArgPy/blob/master/preview.png?raw=true)
 ###
+
+NOTA: si tienes problemas con la importacion de pil.image y pil.imagetk usa:
+pip install --upgrade --force-reinstall Pillow
